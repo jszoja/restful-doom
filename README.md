@@ -59,3 +59,16 @@ Help:
     #'u' => 'use',
     #'use' => 'use',
 ```
+
+# Recorder
+
+There is also an option to record your steps when playing.
+The recorder is a simple html file listening for keyboard events and recording them via `fetch` request to underline _action.php_.
+
+1. Run the php server via `php -S localhost:7777`
+1. Go to recorder site: http://localhost:7777/game.html
+1. Use the arrow keys to move the person in the game
+  - shift - for shooting
+  - enter - for using, eg opening doors
+  - s - for restarting the level
+1. Steps are recorded to _last-run.txt_ file
