@@ -1,6 +1,6 @@
 # About
 
-This is PHP command line communicating to [Restful Doom game]() via HTTP REST API on default 6666 port.
+This is PHP command line communicating to [Restful Doom game](https://github.com/jeff-1amstudios/restful-doom) via HTTP REST API on default 6666 port.
 
 ```shell
 $  php .\game.php play --help 
