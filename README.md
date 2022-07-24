@@ -68,7 +68,8 @@ The recorder is a simple html file listening for keyboard events and recording t
 1. Run the php server via `php -S localhost:7777`
 1. Go to recorder site: http://localhost:7777/game.html
 1. Use the arrow keys to move the person in the game
-  - shift - for shooting
-  - enter - for using, eg opening doors
-  - s - for restarting the level
-1. Steps are recorded to _last-run.txt_ file
+  - **shift** - for shooting
+  - **enter** - for using, eg opening doors
+  - **s** - for restarting the level
+
+Steps are recorded to _last-run.txt_ file
