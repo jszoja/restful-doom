@@ -46,8 +46,8 @@ class Play extends Command
         $client->patch('/api/world', ['json' => ['map' => 1]]);
 
         // executes API commands from the steps file
-        if($input->hasArgument('steps')) {
-            $stepsFile = $input->getArgument('steps');
+        $stepsFile = $input->getArgument('steps');
+        if($stepsFile) {
             $fh = fopen($stepsFile, 'r');
             $counter = 0;
             $output->writeln("Executing steps from the file: $stepsFile");
@@ -87,11 +87,30 @@ class Play extends Command
 
                 $counter++;
             }
+
+            
+
             $output->writeln('');
             $output->writeln('Done');
             $output->writeln("Executed $counter steps.");
         }
 
+
+        $stdin = fopen('php://stdin', 'r');
+        stream_set_blocking($stdin, 0);
+        //system('stty cbreak -echo');
+
+        while (1) {
+        $keypress = fgets($stdin);
+            if ($keypress) {
+                $translatedKey = $this->translateKeypress($keypress);
+                $output->writeln('Key pressed: ' . $translatedKey);
+
+                if($translatedKey === 'ESC') {
+                    break;
+                }
+            }
+        }
 
         return Command::SUCCESS;
 
@@ -103,4 +122,29 @@ class Play extends Command
         // or missing arguments (it's equivalent to returning int(2))
         // return Command::INVALID
     }
+
+    private function translateKeypress($string) {
+        switch ($string) {
+          case "\033[A":
+            return "UP";
+          case "\033[B":
+            return "DOWN";
+          case "\033[C":
+            return "RIGHT";
+          case "\033[D":
+            return "LEFT";
+          case "\n":
+            return "ENTER";
+          case " ":
+            return "SPACE";
+          case "\010":
+          case "\177":
+            return "BACKSPACE";
+          case "\t":
+            return "TAB";
+          case "\e":
+            return "ESC";
+         }
+        return $string;
+      }
 }

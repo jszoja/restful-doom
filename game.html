@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <body">
+        <p>Press arrow keys to move</p>
+        <p id="history">Entries below<br></p>
+
+    </body>
+   
+</html>
+<script>
+    var timer = 0;
+    document.addEventListener('keydown', function(event){
+        var history = document.getElementById('history');
+        var interval = timer > 0 ? (new Date()).getTime()-timer : 0;
+        timer = (new Date()).getTime();
+        history.innerHTML += event.key + " | " +interval+"<br>";
+        fetch('/action.php?k='+event.key+'&t='+interval);
+    });
+</script>
